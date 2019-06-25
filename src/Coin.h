@@ -12,17 +12,22 @@
 #include "PrivateKey.h"
 #include "PublicKey.h"
 
+#include <TrustWalletCore/TWBlockchain.h>
 #include <TrustWalletCore/TWCoinType.h>
 #include <TrustWalletCore/TWCurve.h>
 #include <TrustWalletCore/TWHDVersion.h>
 #include <TrustWalletCore/TWPurpose.h>
 
 #include <string>
+#include <set>
 
 namespace TW {
 
 /// Validates an address for a particular coin.
 bool validateAddress(TWCoinType coin, const std::string& address);
+
+/// Returns the blockchain for a coin type.
+TWBlockchain blockchain(TWCoinType coin);
 
 /// Returns the purpose for a coin type.
 TWPurpose purpose(TWCoinType coin);
@@ -53,5 +58,17 @@ Hash::Hasher publicKeyHasher(TWCoinType coin);
 
 /// Hasher to use for base 58 checksums.
 Hash::Hasher base58Hasher(TWCoinType coin);
+
+/// Returns static prefix for a coin type.
+byte staticPrefix(TWCoinType coin);
+
+/// Returns P2PKH prefix for a coin type.
+byte p2pkhPrefix(TWCoinType coin);
+
+/// Returns P2SH prefix for a coin type.
+byte p2shPrefix(TWCoinType coin);
+
+/// Returns human readable part for a coin type.
+enum TWHRP hrp(TWCoinType coin);
 
 } // namespace TW
